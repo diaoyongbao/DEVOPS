@@ -26,4 +26,23 @@ grant all privileges on *.* to 'root'@'%' identified by 'Admin1234' with grant o
 # 刷新数据库
 FLUSH PRIVILEGES;
 
+# docker运行mysql
+docker run -d -p 3306:3306 --name mysql -e  MYSQL_ROOT_PASSWORD=123456  mysql 
+
+
 # mysql常用命令
+## 事件日志查看
+
+# mysqldunp备份工具使用
+# mysqldump [OPTIONS] database [tables]：备份单个库，或库指定的一个或多个表
+# mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]：备份一个或多个库
+# mysqldump [OPTIONS] --all-databases [OPTIONS]：备份所有库
+mysqldump -uroot -p  --databases zabbix > /root/backup/zabbix.sql
+
+# 备份文件的还原，mysql导入表
+# 进入mysql客户端使用source命令
+# mysql[xxx]> source /Path/file
+source /root/backup/zabbix.sql
+# 未进入mysql命令行模式下的表导入，需检查sql文件中的库与命令要导入的库是否一致
+mysql -uroot -pAdmin1234 ydyw < /root/backup/zabbix.sql 
+

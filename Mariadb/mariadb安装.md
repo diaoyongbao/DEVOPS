@@ -81,6 +81,28 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
 4. 删除默认的测试数据库，取消测试数据库的一系列访问权限。
 刷新授权列表，让初始化的设定立即生效
 ```
+## Mariadb备份
+### 备份策略
+- 备份的意义
+灾难恢复：硬件故障、软件故障、自然灾害、黑客攻击；误操作；
+- 备份类型
+    - 完全备份：
+    - 增量备份：
+    - 差异备份：
+    - 热备：
+    - 温备：
+    - 冷备：
+- 备份工具及备份方案
+    1. mysqldump+binlog: mysqldump：完全备份，通过备份二进制日志实现增量备份；
+    1. lvm2快照+binlog：几乎热备，物理备份
+    1. xtrabackup: 
+			对InnoDB：热备，支持完全备份和增量备份
+			对MyISAM引擎：温备，只支持完全备份
+### 冷备方法
+### 基于文件系统的冷备
+ 停止服务，使用tar、cp等命令对mysql的data文件夹进行打包、压缩、拷贝
+
+## 热备方法
 
 
 ### 出现的问题
@@ -88,3 +110,4 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
 
 - CMake Error: cmake_symlink_library: System Error: Protocol error
 不要在windows的共享文件夹中编译
+
