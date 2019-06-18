@@ -98,11 +98,30 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
     1. xtrabackup: 
 			对InnoDB：热备，支持完全备份和增量备份
 			对MyISAM引擎：温备，只支持完全备份
-### 冷备方法
 ### 基于文件系统的冷备
  停止服务，使用tar、cp等命令对mysql的data文件夹进行打包、压缩、拷贝
 
-## 热备方法
+## 热备
+### 使用xtrabackup对数据库进行备份
+- 下载安装
+    1. 进入[https://www.percona.com/downloads/Percona-XtraBackup-LATEST/]进行下载，选择对应系统的版本即可，选择2.4版本，mysql8.0及往后可选择8.0版本
+    1. yum localinstall -y percona-xtrabackup-24-2.4.14-1.el7.x86_64.rpm
+- 备份
+    1. 完全备份
+    `# innobackupex --user=root --password=Admin1234  ~/backup/`
+    此命令会在/root/backup文件夹下生成当前日期命名的文件夹
+
+
+- 还原
+    1. 整理
+    `innobackupex --apply-log 2019-06-18_21-18-42/`
+    1. 恢复
+   `innobackupex --copy-back 2019-06-18_21-18-42/`
+    1. 改变data文件夹属主属组,否则服务启动不了
+    `chown -R mysql.mysql *`
+
+
+
 
 
 ### 出现的问题
