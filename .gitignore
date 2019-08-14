@@ -4,3 +4,4 @@ harbor
 mariadb-5.5*
 *.tar.gz
 *.rpm
+*.jar

@@ -36,7 +36,7 @@
 
 ## zabbix简单使用
 1. 访问地址
-`http://server_ip_or_name/zabbix `
+`http://server_ip_or_name/zabbix `默认账号Admin，密码zabbix
 1. 修改中文
     点击右上用户头像，进行语言设定，选择chinese即可
 

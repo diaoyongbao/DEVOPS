@@ -28,7 +28,6 @@
 -DWITHOUT_PARTITION_STORAGE_ENGINE=1
 ```
 - 如若要编译进其它功能，如SSL等，则可使用类似如下选项来实现编译时使用某库或不使用某库：
-```
 -DWITH_READLINE=1
 -DWITH_SSL=system
 -DWITH_ZLIB=system
@@ -81,6 +80,9 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
 4. 删除默认的测试数据库，取消测试数据库的一系列访问权限。
 刷新授权列表，让初始化的设定立即生效
 ```
+### 使用rpm包的安装方式
+
+ 
 ## Mariadb备份
 ### 备份策略
 - 备份的意义
@@ -101,7 +103,16 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
 ### 基于文件系统的冷备
  停止服务，使用tar、cp等命令对mysql的data文件夹进行打包、压缩、拷贝
 
+### 使用lvm2实现的快照备份
+ - lvm2配置略
+ - 将lvm存储卷挂载到/mydata文件夹下，将mysql的/data文件数据存放到/mydata文件夹下，重启mysql服务
+ - 施加全局写锁，使用lvm的快照命令对/mydata文件夹进行备份，释放全局写锁。
 ## 热备
+### 使用mysqldump对innodb存储引擎进行热备
+    - mysqldump [options] [db_name [tbl_name ...]] 不会自动创建create database语句
+    - mysqldump [options] --databases db_name ...  自动创建create databases语句
+    - mysqldump [options] --all-databases
+    - 使用--single-transaction 对innodb进行热备
 ### 使用xtrabackup对数据库进行备份
 - 下载安装
     1. 进入[https://www.percona.com/downloads/Percona-XtraBackup-LATEST/]进行下载，选择对应系统的版本即可，选择2.4版本，mysql8.0及往后可选择8.0版本
@@ -110,8 +121,6 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
     1. 完全备份
     `# innobackupex --user=root --password=Admin1234  ~/backup/`
     此命令会在/root/backup文件夹下生成当前日期命名的文件夹
-
-
 - 还原
     1. 整理
     `innobackupex --apply-log 2019-06-18_21-18-42/`
@@ -119,6 +128,8 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
    `innobackupex --copy-back 2019-06-18_21-18-42/`
     1. 改变data文件夹属主属组,否则服务启动不了
     `chown -R mysql.mysql *`
+
+
 
 
 
