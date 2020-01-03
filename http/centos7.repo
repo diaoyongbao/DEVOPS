@@ -1,4 +1,0 @@
-[tsinghua]
-name=ts
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/7/os/x86_64/
-gpgcheck=0
