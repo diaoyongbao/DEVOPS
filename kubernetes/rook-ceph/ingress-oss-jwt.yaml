@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "1024M"
 spec:
   rules:
-  - host: oss.jwt.com
+  - host: oss.devops.com
     http:
        paths:
        - backend:

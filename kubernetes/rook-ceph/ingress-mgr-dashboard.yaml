@@ -5,7 +5,7 @@ metadata:
   namespace: rook-ceph
 spec:
   rules:
-  - host: ceph.jwt.com
+  - host: ceph.devops.com
     http:
        paths:
        - backend:
