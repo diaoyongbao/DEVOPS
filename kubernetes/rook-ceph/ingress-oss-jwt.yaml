@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ceph-rgw-ingress
+  namespace: rook-ceph
+  annotations: 
+    nginx.ingress.kubernetes.io/proxy-body-size: "1024M"
+spec:
+  rules:
+  - host: oss.jwt.com
+    http:
+       paths:
+       - backend:
+          serviceName: rook-ceph-rgw-my-store
+          servicePort: 80
