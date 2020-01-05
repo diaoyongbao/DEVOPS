@@ -1,0 +1,9 @@
+FROM atlassian/jira-software
+
+COPY "atlassian-agent.jar" /opt/atlassian/jira/
+COPY "mysql-connector-java-5.1.48.jar" /opt/atlassian/jira/atlassian-jira/WEB-INF/lib
+
+EXPOSE 8080
+
+RUN echo 'export JAVA_OPTS="-javaagent:/opt/atlassian/jira/atlassian-agent.jar -Djira.dev.mode=true ${JAVA_OPTS}"' >> /opt/atlassian/jira/bin/setenv.sh
+
