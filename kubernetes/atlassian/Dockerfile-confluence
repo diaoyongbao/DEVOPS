@@ -1,0 +1,9 @@
+FROM atlassian/confluence-server
+
+COPY "atlassian-agent.jar" /opt/atlassian/confluence/
+COPY "mysql-connector-java-5.1.48.jar" /opt/atlassian/confluence/confluence/WEB-INF/lib/
+
+EXPOSE 8090
+
+RUN echo 'export JAVA_OPTS="-javaagent:/opt/atlassian/confluence/atlassian-agent.jar ${JAVA_OPTS}"' >> /opt/atlassian/confluence/bin/setenv.sh
+

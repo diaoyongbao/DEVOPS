@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jira-data
+  namespace: atlassian
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: rook-ceph-retain
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jira
+  namespace: atlassian
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jira
+  template:
+    metadata:
+      name: jira
+      labels:
+        app: jira
+    spec:
+      containers:
+      - name: jira
+        image: dyb0204/jira
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /var/atlassian/application-data/jira
+          name: jira-data
+        lifecycle: 
+          preStop:
+              exec:
+                command:
+                - /bin/sh
+                - -c 
+                - ps aux|grep java|grep -v grep|awk {'print $2'}|xargs kill -9
+      volumes:
+      - name: jira-data
+        persistentVolumeClaim:
+          claimName: jira-data
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  jira
+  namespace: atlassian
+spec:
+  selector:
+    app:  jira
+  type:  ClusterIP
+  ports:
+  - name: jira
+    port: 8080
+    targetPort:  8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jira-ingress
+  namespace: atlassian
+spec:
+  rules:
+  - host: jira.devops.com
+    http:
+       paths:
+       - backend:
+          serviceName: jira
+          servicePort: 8080
