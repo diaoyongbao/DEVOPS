@@ -116,7 +116,7 @@ ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql
     - 使用--single-transaction 对innodb进行热备
 ### 使用xtrabackup对数据库进行备份
 - 下载安装
-    1. 进入[https://www.percona.com/downloads/Percona-XtraBackup-LATEST/]进行下载，选择对应系统的版本即可，选择2.4版本，mysql8.0及往后可选择8.0版本
+    1. 进入[https://www.percona.com/downloads/Percona-XtraBackup-2.4/LATEST/]进行下载，选择对应系统的版本即可，选择2.4版本，mysql8.0及往后可选择8.0版本
     1. yum localinstall -y percona-xtrabackup-24-2.4.14-1.el7.x86_64.rpm
 - 备份
     1. 完全备份
