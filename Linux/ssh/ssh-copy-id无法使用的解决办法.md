@@ -1,0 +1,1 @@
+cat ~/.ssh/id_*.pub | ssh  root@host 'cat >> .ssh/authorized_keys'
