@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ceph-rgw-ingress-test
+  namespace: rook-ceph
+spec:
+  rules:
+  - host: test.oss.jwt.com
+    http:
+       paths:
+       - backend:
+          serviceName: rook-ceph-rgw-my-store
+          servicePort: 80

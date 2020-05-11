@@ -1,0 +1,20 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: ceph
+  namespace: default
+  annotations: 
+   storageclass.kubernetes.io/is-default-class: "false"
+provisioner: kubernetes.io/rbd
+reclaimPolicy: Retain
+parameters:
+  monitors: 172.18.63.111:6789
+  adminId: admin
+  adminSecretName: storage-secret
+  adminSecretNamespace: default
+  pool: mypool
+  fsType: xfs
+  userId: admin
+  userSecretName: storage-secret
+  imageFormat: "2"
+  imageFeatures: "layering"
