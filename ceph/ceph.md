@@ -272,7 +272,7 @@ osd 是管理物理磁盘的，而 pg 是一个放置策略组，相同 pg 内�
 
 ### mgr dashboard中的 Object Gateway 配置
 可以使用上面的admin来连接，也可新建用户进行连接
-具体配置信息可参考![官网文档](https://docs.ceph.com/docs/mimic/mgr/dashboard/#enabling-the-object-gateway-management-frontend)，此处不做解释
+具体配置信息可参考[官网文档](https://docs.ceph.com/docs/mimic/mgr/dashboard/#enabling-the-object-gateway-management-frontend)，此处不做解释
 ```
 radosgw-admin user create --uid=system --display-name=system  --system
 ceph dashboard set-rgw-api-access-key VH9L1XY18PKEX7AECPSN
