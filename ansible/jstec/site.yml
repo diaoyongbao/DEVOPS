@@ -1,0 +1,9 @@
+---
+- hosts: svc
+  remote_user: root
+  roles:
+    - base     
+- hosts: dev-bid
+  remote_user: root
+  roles:
+    - bid

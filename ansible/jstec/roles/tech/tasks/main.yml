@@ -1,0 +1,24 @@
+- name: 启动mysql
+  systemd: 
+    name: mysqld
+    state: started
+    enabled: yes
+- name: 启动es
+  systemd: 
+    name: elasticsearch
+    state: started
+    enabled: yes
+- name: 启动rabbitmq
+  shell: docker start rabbitmq
+- name: 启动sgfs
+  shell: /data/sgfs-1.0.2/startup.sh
+- name: 启动eureka
+  shell: docker start roncoo-eureka
+- name: 启动config
+  shell: docker start roncoo-config
+- name: 启动nginx
+  shell: /usr/local/nginx/sbin/nginx -s  reload
+- name: 启动nodejs
+  shell: cd /usr/local/project/roncoo-web && PORT=10000 pm2 start npm --name roncoo-education-web -- run dev 
+
+

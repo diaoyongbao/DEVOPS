@@ -1,0 +1,7 @@
+- name: Backup Allocate DataBase
+  hosts: all
+  tasks:
+    - name: backup some database
+      shell: innobackupex ---user=root --password=Jwt@1234 --databases={{database}} /data/backup/{{database}}/
+    - name: upload use s3cmd
+      shell: s3cmd put -r /data/backup/{{database}}/ s3://backup/mysql/172.18.63.141/{{database}}/

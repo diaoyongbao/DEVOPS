@@ -1,0 +1,22 @@
+- name: 启动dev web服务
+  docker_container:
+    name: "{{ item.key }}"
+    image: "{{ item.value.img_name }}"
+    pull: yes
+    network_mode: host
+    volumes:
+      - "{{ item.value.path }}/logs:/web/logs/"
+      - "{{ item.value.path }}/bin/start.sh:/web/bin/start.sh"
+  with_dict: "{{ devweb }}"
+  tags: dev
+- name: 启动prod web服务
+  docker_container:
+    name: "{{ item.key }}"
+    image:  "{{ item.value.img_name }}"
+    pull: yes
+    network_mode: host
+    volumes:
+       - "{{ item.value.path }}/logs:/web/logs/"
+       - "{{ item.value.path }}/bin/start.sh:/web/bin/start.sh"
+    with_dict: "{{ prodweb }}"
+  tags: prod

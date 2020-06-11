@@ -1,0 +1,38 @@
+def label = "ansible"  
+podTemplate(label:label,containers:[  //定义pod模板
+    containerTemplate(name: 'ansible',image:'172.18.61.24/base/ansible:latest',command:'cat',ttyEnabled:true) //定义kubectl容器
+]){
+    node(label){
+        git credentialsId: 'gitlab_root_password', url: 'http://172.18.61.36/YW/ansible.git'
+        stage('deploy'){
+            container('ansible'){
+                withCredentials([sshUserPrivateKey(credentialsId: 'ansible_credential_ID', keyFileVariable: '', passphraseVariable: '', usernameVariable: '')]){
+                    dir('mysql_backup/') {
+                        ansiblePlaybook(
+                            credentialsId: 'ansible_credential_ID',
+                            inventory: 'mysql_inventory',
+                            playbook: 'ansible.yml'
+                        )
+                    }
+                }
+            } 
+        }  
+    }
+}
+        
+    // stages {
+    //     stage('Deploy') {
+    //             steps {
+    //                 git credentialsId: 'gitlab_root_password', url: 'http://172.18.61.36/YW/ansible.git'
+    //             }
+    //             steps {
+    //                 dir('mysql_backup/') {
+    //                     ansiblePlaybook(
+    //                         credentialsId: 'ansible_credential_ID',
+    //                         inventory: 'mysql_inventory',
+    //                         playbook: 'ansible.yml'
+    //                     )
+    //                 }
+    //             }
+    //         }
+    // }

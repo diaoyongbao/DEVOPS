@@ -1,0 +1,40 @@
+- name: 启动mysql
+  systemd:
+    name: mysqld
+    state: started
+    enabled: yes
+  ignore_errors: yes
+- name: 启动redis
+  shell: ls
+- name: 启动docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+- name: 停止bid-bss
+  docker_container:
+     name: bid-bss
+     state: stopped
+  ignore_errors: yes
+  tags: never
+- name: 启动bid-bss
+  docker_container:
+     name: bid-bss
+     image: 172.18.61.24/jiangsu/sttp.web.budding.bss
+     pull: yes
+     ports: 
+     - 8640:8640
+     volumes:
+     - /etc/localtime:/etc/localtime:ro
+     etc_hosts:
+       jwt.com: 172.18.61.56
+- name: 停止bid-portal
+  docker_container:
+    name: bid-portal
+    state: stopped
+- name: 启动bid-portal
+  docker_container:
+    name:  
+    image: 172.18.61.24/base/nginx:latest
+    pull: yes
+  tags: never

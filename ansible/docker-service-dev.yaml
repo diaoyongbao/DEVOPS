@@ -1,0 +1,20 @@
+- name: docker服务部署
+  hosts: all
+  vars: 
+    name: '{{ service_name }}'
+    # contents: "{{ lookup('file', 'prod.env') }}"
+  tasks:
+  - name: 打印container_name
+    shell: "echo {{ item.key }} {{ item.value }}"
+    loop: '{{ service_name|dict2items }}'
+  - name: 停止服务&清理容器
+    shell: docker stop {{ item.key }} && docker rm {{ item.key }}
+    loop: '{{ service_name|dict2items }}'
+    ignore_errors: yes
+  - name: 拉取镜像
+    shell: docker pull {{ item.value }}
+    loop: '{{ service_name|dict2items }}'
+  - name: 运行服务
+    shell: "docker run -it -d --net=host --name {{ item.key }} \
+            -v /dev/urandom:/dev/random {{ item.value }}"
+    loop: '{{ service_name|dict2items }}'

@@ -1,0 +1,11 @@
+- name: rootConnect
+  hosts: all
+  tasks:
+  # - name: copy auth
+    # copy: src="{{ lookup('file', 'authorized_keys') }}" dest=/root/.ssh/
+    # shell: cat "{{ lookup('file', 'authorized_keys') }}" >> /root/.ssh/authorized_keys
+  - name: ssh-copy
+    authorized_key: 
+      user: root 
+      key: "{{ lookup('file', 'id_rsa.pub') }}"
+      state: present

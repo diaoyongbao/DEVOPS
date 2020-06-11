@@ -1,0 +1,5 @@
+- name: 同步所有节点的hosts文件
+  hosts: all
+  tasks: 
+  - name: copy hosts
+    copy: src=hosts dest=/etc/hosts

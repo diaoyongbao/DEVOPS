@@ -1,0 +1,10 @@
+user:
+#  - college:
+#      img_name: service.college.prod
+#      svc_port: 8081
+   shencan:
+       name: shencan
+       shell: bash
+   ruifeng:
+       name: ruifeng
+       shell: zsh

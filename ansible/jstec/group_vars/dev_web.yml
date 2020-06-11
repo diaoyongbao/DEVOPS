@@ -1,0 +1,24 @@
+dev_web:
+  jiangsu.web.wxapp.dev:
+      img_name: 172.18.61.24/jiangsu/web.wxapp.dev
+      path: /data/dev/web/sttp-web-front-wxapp/
+  jiangsu.web.task.dev:
+      img_name: 172.18.61.24/jiangsu/web.task.dev
+      path: /data/dev/web/sttp-web-task
+  jiangsu.web.portal.dev:
+      img_name: 172.18.61.24/jiangsu/web.portal.dev
+      path: /data/dev/web/sttp-web-front-portal/
+  jiangsu.web.bss.dev:
+      img_name: 172.18.61.24/jiangsu/web.bss.dev
+      path: /data/dev/web/sttp-web-front-bss/
+  jiangsu.web.bcs.dev:
+      img_name: 172.18.61.24/jiangsu/web.bcs.dev
+      path: /data/dev/web/sttp-web-front-bcs/
+  jiangsu.web.auth.dev:
+      img_name: 172.18.61.24/jiangsu/web.auth.dev
+      path: /data/dev/web/sttp-web-front-auth/
+
+prodweb:
+  jiangsu.web.task.prod:
+      img_name: 172.18.61.24/jiangsu/web.task.prod
+      path: /data/dev/web/sttp-web-front-wxapp/

@@ -1,0 +1,23 @@
+# - name: 停止服务
+#   docker_container:
+#      name: jiangsu.service.goods.dev
+#      state: stopped
+#   tags: never
+# - name: test
+#   debug: msg="{{ item.key }} & {{ item.value.name }} & {{ item.value.shell }}"
+#   with_dict: "{{ user  }}"
+# - name: svc
+#   debug: msg="{{ item.key }} & {{ item.value.img_name }}"
+#   with_dict: "{{ svc }}"
+- name: 启动prod svc服务
+  docker_container:
+    name: "{{ item.key }}"
+    image: "{{ item.value.img_name }}"
+    pull: yes
+    network_mode: host
+    volumes:
+      - /dev/urandom:/dev/random
+      - "{{ item.value.path }}/logs:/jstec/logs/"
+      - "{{ item.value.path }}/bin/start.sh:/jstec/bin/start.sh"
+  with_dict: "{{ svc }}"
+  tags: prod

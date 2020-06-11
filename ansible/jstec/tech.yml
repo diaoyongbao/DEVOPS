@@ -1,0 +1,6 @@
+---
+- hosts: tech
+# vars_files:
+  remote_user: root
+  roles:
+     - tech        

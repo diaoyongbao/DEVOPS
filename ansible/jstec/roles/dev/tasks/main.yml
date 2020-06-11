@@ -1,0 +1,68 @@
+- name: 启动bid_mysql
+  systemd: 
+    name: mysqld
+    state: started
+    enabled: yes
+  #when: inventory_hostname in groups['dev-mysql']
+  when: ansible_eth0.ipv4.address == "172.18.61.117"
+  tags: 
+    - mysql
+- name: 启动dev_mysql
+  docker_container:
+    name: mysql
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    env:
+      MYSQL_ROOT_PASSWORD: root@nj
+    volumes:
+      - /data/mysql:/var/lib/mysql    
+  when: ansible_eth0.ipv4.address == "172.18.61.57"
+  tags: 
+    - mysql
+- name: 启动mycat 
+  shell: echo 0 
+  when: ansible_eth0.ipv4.address == "172.18.61.57"  
+#- name: 启动zk
+
+- name: 启动kafka
+  systemd: 
+    name: kafka
+    state: started
+    enabled: yes
+  when: ansible_eth0.ipv4.address == "172.18.61.74"
+  tags: kafka   
+#- name: 启动redis
+
+- name: 启动es
+  systemd:
+    name: elasticsearch
+    state: started
+    enabled: yes
+  when: ansible_eth0.ipv4.address == "172.18.61.58"
+
+- name: 启动svc服务
+  docker_container:
+    name: "{{ item.key }}"
+    image: "{{ item.value.img_name }}"
+    pull: yes
+    network_mode: host
+    volumes: 
+      - /dev/urandom:/dev/random
+      - "{{ item.value.path }}/logs:/jstec/logs/"
+      - "{{ item.value.path }}/bin/start.sh:/jstec/bin/start.sh"
+  with_dict: "{{ dev_svc }}"
+  when: ansible_eth0.ipv4.address == "172.18.61.70"
+
+- name: 启动web服务
+  docker_container:
+    name: "{{ item.key }}"
+    image: "{{ item.value.img_name }}"
+    pull: yes
+    network_mode: host
+    volumes: 
+      - "{{ item.value.path }}/logs:/web/logs/"
+      - "{{ item.value.path }}/bin/start.sh:/web/bin/start.sh"
+  with_dict: "{{ dev_web }}"
+  when: ansible_eth0.ipv4.address == "172.18.61.70"   
+#- name: 启动ui服务 

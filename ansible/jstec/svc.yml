@@ -1,0 +1,8 @@
+---
+- hosts: dev
+  vars_files:
+  - "group_vars/user.yml"
+  - "group_vars/svc.yml"
+  remote_user: root
+  roles:
+     - svc    

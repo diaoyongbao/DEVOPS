@@ -1,0 +1,70 @@
+svc:
+   jiangsu.service.components.dev:
+      img_name: 172.18.61.24/jiangsu/service.components.dev
+      path: /data/dev/service/sttp-service-common-components/
+   jiangsu.service.college.dev:
+      img_name: 172.18.61.24/jiangsu/service.college.dev
+      path: /data/dev/service/sttp-service-college/
+   jiangsu.service.log.dev:
+      img_name: 172.18.61.24/jiangsu/service.log.dev
+      path: /data/dev/service/sttp-service-log/
+   jiangsu.service.goods.dev:
+      img_name: 172.18.61.24/jiangsu/service.goods.dev
+      path: /data/dev/service/sttp-service-goods/
+   jiangsu.service.help.dev:
+      img_name: 172.18.61.24/jiangsu/service.help.dev
+      path: /data/dev/service/sttp-service-help/
+   jiangsu.service.information.dev:
+      img_name: 172.18.61.24/jiangsu/service.information.dev
+      path: /data/dev/service/sttp-service-information/
+   jiangsu.service.publicity.dev:
+      img_name: 172.18.61.24/jiangsu/service.publicity.dev
+      path: /data/dev/service/sttp-service-publicity/
+   jiangsu.service.resource.dev:
+      img_name: 172.18.61.24/jiangsu/service.resource.dev
+      path: /data/dev/service/sttp-service-resource/
+   jiangsu.service.shop.dev:
+      img_name: 172.18.61.24/jiangsu/service.shop.dev
+      path: /data/dev/service/sttp-service-shop/
+   jiangsu.service.adminuser.dev:
+      img_name: 172.18.61.24/jiangsu/service.adminuser.dev
+      path: /data/dev/service/sttp-service-adminuser/
+   jiangsu.service.captcha.dev:
+      img_name: 172.18.61.24/jiangsu/service.captcha.dev
+      path: /data/dev/service/sttp-service-captcha/
+   jiangsu.service.config.dev:
+      img_name: 172.18.61.24/jiangsu/service.config.dev
+      path: /data/dev/service/sttp-service-config/
+   jiangsu.service.demand.dev:
+      img_name: 172.18.61.24/jiangsu/service.demand.dev
+      path: /data/dev/service/sttp-service-demand/
+   jiangsu.service.search.dev:
+      img_name: 172.18.61.24/jiangsu/service.search.dev
+      path: /data/dev/service/sttp-service-search/
+   jiangsu.service.tenant.dev:
+      img_name: 172.18.61.24/jiangsu/service.tenant.dev
+      path: /data/dev/service/sttp-service-tenant/
+   jiangsu.service.upload.dev:
+      img_name: 172.18.61.24/jiangsu/service.upload.dev
+      path: /data/dev/service/sttp-service-upload/
+   jiangsu.service.user.dev:
+      img_name: 172.18.61.24/jiangsu/service.user.dev
+      path: /data/dev/service/sttp-service-user/
+   jiangsu.service.contract.dev:
+      img_name: 172.18.61.24/jiangsu/service.contract.dev
+      path: /data/dev/service/sttp-service-contract-registration/
+   jiangsu.service.external.dev:
+      img_name: 172.18.61.24/jiangsu/service.external.dev
+      path: /data/dev/service/sttp-service-external/
+   jiangsu.service.settle.dev:
+      img_name: 172.18.61.24/jiangsu/service.settle.dev
+      path: /data/dev/service/sttp-service-settle/
+   jiangsu.service.capital.dev:
+      img_name: 172.18.61.24/jiangsu/service.capital.dev
+      path: /data/dev/service/sttp-service-capital/
+   jiangsu.service.statistics.dev:
+      img_name: 172.18.61.24/jiangsu/service.statistics.dev
+      path: /data/dev/service/sttp-service-statistics/
+   jiangsu.service.registration.dev:
+      img_name: 172.18.61.24/jiangsu/service.registration.dev
+      path: /data/dev/service/sttp-service-registration/

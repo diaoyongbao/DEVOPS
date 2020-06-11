@@ -1,0 +1,9 @@
+- name: ntp date sync
+  hosts: all
+  tasks:
+  - name: 安装ntp服务
+    yum: name=ntpdate
+    tags: install
+  - name: 时间同步
+    shell: "ntpdate pool.ntp.org"
+    tags: cmd

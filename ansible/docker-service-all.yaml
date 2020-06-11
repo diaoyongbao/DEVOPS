@@ -1,0 +1,27 @@
+- name: docker服务部署
+  hosts: all
+  vars: 
+    name: '{{ service_name }}'
+    # contents: "{{ lookup('file', 'prod.env') }}"
+  tasks:
+  - name: 打印container_name
+    shell: "echo {{ item.key }} {{ item.value }}"
+    loop: '{{ service_name|dict2items }}'
+  - name: 停止服务&清理容器
+    shell: docker stop {{ item.key }} && docker rm {{ item.key }}
+    loop: '{{ service_name|dict2items }}'
+    ignore_errors: yes
+  - name: 拉取镜像
+    shell: docker pull {{ item.value }}
+    loop: '{{ service_name|dict2items }}'
+  - name: 运行服务
+    shell: "docker run -it -d --net=host --name {{ item.key }}  -e zk_ip=172.18.63.85 \
+            -e zk_port=5181 \
+            -e mysql_ip=172.18.63.52 \
+            -e mysql_port=3306 \
+            -e mongo_ip=172.18.63.53 \
+            -e es=172.18.63.63:9200,172.18.63.64:9200,172.18.63.65:9200 \
+            -e redis=172.18.63.85:6001,172.18.63.85:7001 \
+            -e kafka=172.18.63.89:9092,172.18.63.90:9092,172.18.63.91:9092 \
+            -v /dev/urandom:/dev/random {{ item.value }}"
+    loop: '{{ service_name|dict2items }}'

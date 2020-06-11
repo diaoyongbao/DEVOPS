@@ -1,0 +1,42 @@
+---
+- hosts: lasa_mysql
+  remote_user: root
+  tasks:
+    - name: 启动mysql
+      shell: docker start lasa-mysql    
+- hosts: lasa_es
+  tasks:
+    - name: 启动es
+      systemd:
+        name: elasticsearch
+        state: started
+        enabled: yes
+- hosts: lasa_mongo
+  tasks:
+    - name: 启动mongo
+      shell: cd /home/mongodb/mongodb-3.4.6 && ./bin/mongod -f ./conf/mongod.conf  
+      ignore_errors: yes
+- hosts: lasa_web
+  tasks:
+    - name: 启动web服务
+      shell:  cd /data/web &&  ./start_all_web.sh 
+- hosts: lasa_svc
+  tasks:
+    - name: 启动svc服务
+      shell: cd /data/service && ./start-all-service.sh
+- hosts: lasa_ui 
+  tasks:
+    - name: 启动portal服务
+      shell: cd /data/ui/portal/bin  && ./start.sh
+    - name: 启动ui服务
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+- hosts: lasa_nginx
+  tasks:
+    - name: 启动nginx服务
+      systemd: 
+         name: nginx
+         state: started
+         enabled: yes

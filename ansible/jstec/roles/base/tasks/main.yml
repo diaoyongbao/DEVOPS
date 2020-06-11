@@ -1,0 +1,8 @@
+- name: 安装docker
+  yum: name=docker-ce
+  tags: install
+- name: 启动docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
