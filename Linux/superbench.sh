@@ -2,11 +2,11 @@
 #
 # Description: Auto system info & I/O test & network to China script
 #
-# Copyright (C) 2017 - 2020 Oldking <oooldking@gmail.com>
+# Copyright (C)  2020 smvan <www@smvan.cn>
 #
 # Thanks: Bench.sh <i@teddysun.com>
 #
-# URL: https://www.oldking.net/350.html
+# URL: https://www.smvan.cn/?p=108&preview=truel
 #
 
 RED='\033[0;31m'
@@ -21,11 +21,11 @@ about() {
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
 	echo " \                   v1.1.7 (7 Apr 2020)                 / "
-	echo " \                   Created by Oldking                  / "
+	echo " \                   Created by dyb                  / "
 	echo " ========================================================= "
 	echo ""
 	echo " Intro: https://diaoyongbao.github.io"
-	echo " Copyright (C) 2020 dyb dyb6884@gmail.com"
+	echo " Copyright (C) 2020 smvan www@smvan.cn"
 	echo ""
 }
 
